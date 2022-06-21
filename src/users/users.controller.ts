@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUserData } from './dto/create-user.dto';
 
 // controller used to get all things user related
 
@@ -29,8 +30,9 @@ export class UsersController {
   }
 
   // 3) Creates a new user
-  @Get('create/:name')
-  createUser(@Param('name') name: string): any {
-    return this.usersService.createUser(String(name));
+  @Post('create')
+  createUser(@Body() body: CreateUserData): any {
+    console.log('hitting control');
+    return this.usersService.createUser(body);
   }
 }
