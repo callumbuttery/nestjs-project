@@ -3,8 +3,10 @@ import { UsersService } from './users.service';
 
 // controller used to get all things user related
 
-//localhost:3000/users
-//localhost:3000/users/1
+// ****ROUTES IN ORDER****
+// 1) localhost:3000/users
+// 2) localhost:3000/users/1
+// 3) localhost:3000/users/create/callum
 
 @Controller('users')
 export class UsersController {
@@ -24,5 +26,11 @@ export class UsersController {
   getUsersById(@Param('id') id: string): any {
     // call function inside of service
     return this.usersService.findById(Number(id));
+  }
+
+  // 3) Creates a new user
+  @Get('create/:name')
+  createUser(@Param('name') name: string): any {
+    return this.usersService.createUser(String(name));
   }
 }

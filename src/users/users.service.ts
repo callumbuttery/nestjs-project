@@ -4,7 +4,6 @@ import { Injectable } from '@nestjs/common';
 export class UsersService {
   //simulate a database
   private users: any[] = [
-    { id: 0, name: 'john' },
     { id: 1, name: 'bob' },
     { id: 2, name: 'jane' },
     { id: 3, name: 'joe' },
@@ -18,5 +17,14 @@ export class UsersService {
 
   findById(id: number): any {
     return this.users.find((user) => user.id === id);
+  }
+
+  createUser(name: string) {
+    const user = {
+      id: this.users.length + 1,
+      name,
+    };
+    this.users.push(user);
+    return user;
   }
 }
