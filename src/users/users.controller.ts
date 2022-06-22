@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserData } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -41,7 +41,7 @@ export class UsersController {
   }
 
 
-  
+
 
   // 3) Creates a new user
   @ApiCreatedResponse({ type: User })
@@ -49,5 +49,12 @@ export class UsersController {
   createUser(@Body() body: CreateUserData): User {
     console.log('hitting control');
     return this.usersService.createUser(body);
+  }
+
+
+  // 4) Query Users
+  @Get('all/query')
+  queryUsers(@Query('name') name: string): User[] {
+    return this.usersService.queryUsers(name);
   }
 }

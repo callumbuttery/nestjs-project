@@ -29,4 +29,8 @@ export class UsersService {
     this.users.push(user);
     return user;
   }
+
+  queryUsers(name: string): User[] {
+    if (name) return this.users.filter((user) => user.name === name);
+  }
 }
