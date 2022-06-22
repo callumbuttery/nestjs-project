@@ -2,7 +2,7 @@ import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserData } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 // controller used to get all things user related
 
@@ -33,6 +33,7 @@ export class UsersController {
   }
 
   // 3) Creates a new user
+  @ApiResponse({ type: User })
   @Post('create')
   createUser(@Body() body: CreateUserData): User {
     console.log('hitting control');
