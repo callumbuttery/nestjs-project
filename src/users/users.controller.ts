@@ -10,9 +10,10 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 // Visit localhost:3000/ to access swagger docs to hit these apis
 
-// 1) localhost:3000/users
+// 1) localhost:3000/users/all
 // 2) localhost:3000/users/1
 // 3) localhost:3000/users/create - Needs to be hit within postman / swagger docs
+// 3) localhost:3000/users/all/query
 
 @ApiTags('users')
 @Controller('users')
@@ -39,7 +40,6 @@ export class UsersController {
     // call function inside of service
     return this.usersService.findById(Number(id));
   }
-
 
 
 
