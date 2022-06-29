@@ -62,6 +62,12 @@ export class UsersController {
   // 4) Query Users
   @Get('all/query')
   queryUsers(@Query('name') name: string): User[] {
-    return this.usersService.queryUsers(name);
+
+    const users = this.usersService.queryUsers(name);
+
+    if (!users) {
+      throw new NotFoundException();
+    }
+    return users;
   }
 }
