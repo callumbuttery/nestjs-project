@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Param, Body, Query, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  Query,
+  NotFoundException,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserData } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -36,10 +45,10 @@ export class UsersController {
   @Get(':id')
   //need to add the Param decorator to get the id
   //We always expect id to be a string as it is being pulled from the url
-  getUsersById(@Param('id') id: string): User {
+  getUsersById(@Param('id', ParseIntPipe) id: number): User {
 
     // call function inside of service
-    const user = this.usersService.findById(Number(id));
+    const user = this.usersService.findById(id);
 
     if (!user) {
       throw new NotFoundException();
